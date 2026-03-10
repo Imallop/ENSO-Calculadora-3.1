@@ -50,4 +50,9 @@ public interface EventHandler {
      * Handle the backspace button press
      */
     void onBackspacePressed();
+    
+    /**
+     * Handle the degree/radian toggle button press
+     */
+    void onDegRadToggle();
 }
