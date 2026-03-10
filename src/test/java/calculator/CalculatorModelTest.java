@@ -2,6 +2,8 @@ package calculator;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions.*;
@@ -114,6 +116,34 @@ class CalculatorModelTest {
     })
     void calculateUnaryParameterizedTest(UnaryOperatorModes mode, double input, double expected) {
         CalculatorModel calculator = new CalculatorModel();
+        assertEquals(expected, calculator.calculateUnary(mode, input), 1e-10);
+    }
+
+    // ---------------- Degree/Radian Toggle Tests ----------------
+
+    @Test
+    void toggleDegRadTest() {
+        CalculatorModel calculator = new CalculatorModel();
+        assertTrue(calculator.isUseDegrees());
+        assertFalse(calculator.toggleDegRad());
+        assertFalse(calculator.isUseDegrees());
+        assertTrue(calculator.toggleDegRad());
+        assertTrue(calculator.isUseDegrees());
+    }
+
+    @ParameterizedTest(name = "Radians: {0}({1}) => expected {2}")
+    @CsvSource({
+        "SIN, 0.5235987755982988, 0.5",
+        "SIN, -0.5235987755982988, -0.5",
+        "COS, 1.0471975511965976, 0.5",
+        "COS, -1.0471975511965976, 0.5",
+        "TAN, 0.7853981633974483, 1.0",
+        "TAN, -0.7853981633974483, -1.0",
+        "TAN, 1.5707963267948966, NaN",
+    })
+    void calculateUnaryRadiansTest(UnaryOperatorModes mode, double input, double expected) {
+        CalculatorModel calculator = new CalculatorModel();
+        calculator.toggleDegRad(); // switch to radians
         assertEquals(expected, calculator.calculateUnary(mode, input), 1e-10);
     }
 }

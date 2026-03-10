@@ -47,4 +47,9 @@ public interface EventHandler {
      * Handle the clear/reset button press
      */
     void onClearPressed();
+
+    /**
+     * Handle the degree/radian toggle button press
+     */
+    void onDegRadToggle();
 }
