@@ -16,6 +16,7 @@ import java.io.InputStream;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.Locale;
+
 import javax.imageio.ImageIO;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -26,8 +27,25 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 
-import static calculator.domain.BinaryOperatorModes.*;
-import static calculator.domain.UnaryOperatorModes.*;
+import static calculator.domain.BinaryOperatorModes.ADD;
+import static calculator.domain.BinaryOperatorModes.DIVIDE;
+import static calculator.domain.BinaryOperatorModes.MINUS;
+import static calculator.domain.BinaryOperatorModes.MULTIPLY;
+import static calculator.domain.BinaryOperatorModes.POWER;
+import static calculator.domain.SpecialNumbers.E;
+import static calculator.domain.SpecialNumbers.PI;
+import static calculator.domain.UnaryOperatorModes.ABS;
+import static calculator.domain.UnaryOperatorModes.BIN;
+import static calculator.domain.UnaryOperatorModes.COS;
+import static calculator.domain.UnaryOperatorModes.INV;
+import static calculator.domain.UnaryOperatorModes.LN;
+import static calculator.domain.UnaryOperatorModes.LOG;
+import static calculator.domain.UnaryOperatorModes.NEGATE;
+import static calculator.domain.UnaryOperatorModes.PERCENT;
+import static calculator.domain.UnaryOperatorModes.SIN;
+import static calculator.domain.UnaryOperatorModes.SQRT;
+import static calculator.domain.UnaryOperatorModes.SQUARE;
+import static calculator.domain.UnaryOperatorModes.TAN;
 
 public class SwingView implements View {
 
@@ -38,9 +56,9 @@ public class SwingView implements View {
 
     private final JButton[] butNums;
     private final JButton butAdd, butMinus, butMultiply, butDivide,
-            butEqual, butCancel, butSqrt, butSquare, butInv, butCos, 
-            butSin, butTan, butPower, butLog, butPercent, butAbs, butBin, 
-            butln, butNegate, butDecimal, butDegRad;
+            butEqual, butCancel, butSqrt, butSquare, butInv, butCos,
+            butSin, butTan, butPower, butLog, butPercent, butAbs, butBin,
+            butln, butNegate, butDecimal, butE, butPi, butDegRad;
 
     private EventHandler eventHandler;
 
@@ -79,7 +97,7 @@ public class SwingView implements View {
         text.setHorizontalAlignment(JTextField.RIGHT);
         text.setColumns(15);
         text.setBackground(Color.WHITE);
-        text.setOpaque(true); 
+        text.setOpaque(true);
         text.setBorder(javax.swing.BorderFactory.createLineBorder(
             UIManager.getColor("Panel.background"), 5));
 
@@ -105,6 +123,8 @@ public class SwingView implements View {
         butln = createButton("ln", ButtonType.FUNCTION);
         butPower = createButton("x^y", ButtonType.FUNCTION);
         butLog = createButton("log", ButtonType.FUNCTION);
+        butE = createButton("e", ButtonType.FUNCTION);
+        butPi = createButton("pi", ButtonType.FUNCTION);
         butPercent = createButton("%", ButtonType.FUNCTION);
         butAbs = createButton("abs", ButtonType.FUNCTION);
         butBin = createButton("bin", ButtonType.FUNCTION);
@@ -172,6 +192,9 @@ public class SwingView implements View {
         subPanels[5].add(butInv);
         subPanels[5].add(butln);
         subPanels[5].add(butLog);
+        subPanels[5].add(Box.createHorizontalStrut(15));
+        subPanels[5].add(butE);
+        subPanels[5].add(butPi);
         mainPanel.add(subPanels[5]);
 
         // --- Row 6 ---
@@ -232,6 +255,10 @@ public class SwingView implements View {
         butAbs.addActionListener(e -> eventHandler.onUnaryOperatorPressed(ABS));
         butBin.addActionListener(e -> eventHandler.onUnaryOperatorPressed(BIN));
         butNegate.addActionListener(e -> eventHandler.onUnaryOperatorPressed(NEGATE));
+
+        //Special Numbers
+        butE.addActionListener(e -> eventHandler.onSpecialNumberPressed(E));
+        butPi.addActionListener(e -> eventHandler.onSpecialNumberPressed(PI));
 
         // Other actions
         butDecimal.addActionListener(e -> eventHandler.onDecimalPressed());
