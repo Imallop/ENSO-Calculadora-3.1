@@ -40,7 +40,7 @@ public class SwingView implements View {
     private final JButton butAdd, butMinus, butMultiply, butDivide,
             butEqual, butCancel, butSqrt, butSquare, butInv, butCos, 
             butSin, butTan, butPower, butLog, butPercent, butAbs, butBin, 
-            butln, butNegate, butDecimal;
+            butln, butNegate, butDecimal, butDegRad;
 
     private EventHandler eventHandler;
 
@@ -110,6 +110,7 @@ public class SwingView implements View {
         butBin = createButton("bin", ButtonType.FUNCTION);
         butNegate = createButton("+/-", ButtonType.NUMBER);
         butDecimal = createButton(".", ButtonType.NUMBER);
+        butDegRad = createButton("Deg", ButtonType.FUNCTION);
 
         setupLayout();
     }
@@ -183,6 +184,7 @@ public class SwingView implements View {
         subPanels[7].add(butCos);
         subPanels[7].add(butSin);
         subPanels[7].add(butTan);
+        subPanels[7].add(butDegRad);
         mainPanel.add(subPanels[7]);
 
         // --- Row 8 ---
@@ -235,6 +237,7 @@ public class SwingView implements View {
         butDecimal.addActionListener(e -> eventHandler.onDecimalPressed());
         butEqual.addActionListener(e -> eventHandler.onEqualsPressed());
         butCancel.addActionListener(e -> eventHandler.onClearPressed());
+        butDegRad.addActionListener(e -> eventHandler.onDegRadToggle());
     }
 
     @Override
@@ -298,6 +301,10 @@ public class SwingView implements View {
     public void setDisplay(String displayText) {
         text.setText(displayText);
         startNewInput = true;
+    }
+
+    public void updateDegRadButton(boolean useDegrees) {
+        butDegRad.setText(useDegrees ? "Deg" : "Rad");
     }
 
     private ImageIcon loadIcon() throws IOException {

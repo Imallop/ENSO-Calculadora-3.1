@@ -19,6 +19,7 @@ public class CalculatorModel {
     private Double num1 = 0.0;
     private Double num2 = 0.0;
     private BinaryOperatorModes pendingMode = BinaryOperatorModes.UNSET;
+    private boolean useDegrees = true;
 
     /**
      * Executes the pending binary operation.
@@ -76,7 +77,20 @@ public class CalculatorModel {
      * Unary operations
      */
     public Double calculateUnary(UnaryOperatorModes newMode, Double num) {
-        return UnaryOperatorFactory.create(newMode).execute(num);
+        return UnaryOperatorFactory.create(newMode, useDegrees).execute(num);
+    }
+
+    /**
+     * Toggle between degrees and radians mode
+     * @return true if now using degrees, false if using radians
+     */
+    public boolean toggleDegRad() {
+        useDegrees = !useDegrees;
+        return useDegrees;
+    }
+
+    public boolean isUseDegrees() {
+        return useDegrees;
     }
 }
 

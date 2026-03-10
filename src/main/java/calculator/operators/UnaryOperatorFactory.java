@@ -17,14 +17,14 @@ public class UnaryOperatorFactory {
      * @return The created UnaryOperator instance
      * @throws IllegalArgumentException if the mode is not recognized
      */
-    public static UnaryOperator create(UnaryOperatorModes mode) {
+    public static UnaryOperator create(UnaryOperatorModes mode, boolean useDegrees) {
         return switch (mode) {
             case SQUARE -> new SquareOperator();
             case SQRT -> new SqrtOperator();
             case INV -> new InvOperator();
-            case COS -> new CosOperator();
-            case SIN -> new SinOperator();
-            case TAN -> new TanOperator();
+            case COS -> new CosOperator(useDegrees);
+            case SIN -> new SinOperator(useDegrees);
+            case TAN -> new TanOperator(useDegrees);
             case LOG -> new LogOperator();
             case LN -> new LnOperator();
             case PERCENT -> new PercentOperator();
