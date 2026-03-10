@@ -67,6 +67,28 @@ public class Controller implements EventHandler {
     }
 
     @Override
+    public void onExpPressed() {
+        // After a user presses equals and gets a result,
+        // the next exp press should start a new input
+        if (resetingInput) {
+            displayBuffer = new StringBuilder();
+            view.clearDisplay();
+            resetingInput = false;
+        }
+        
+        // Prevent multiple E in the current number
+        String currentText = displayBuffer.toString().toUpperCase();
+        if (!currentText.contains("E")) {
+            // Handle leading E by prepending a "1"
+            if (displayBuffer.length() == 0) {
+                displayBuffer.append("1");
+            }
+            displayBuffer.append("E");
+            view.setDisplay(displayBuffer.toString());
+        }
+    }
+    
+    @Override
     public void onBinaryOperatorPressed(BinaryOperatorModes mode) {
 
         if (displayBuffer.length() > 0) {

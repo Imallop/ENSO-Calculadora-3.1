@@ -59,7 +59,7 @@ public class SwingView implements View {
             butEqual, butCancel, butSqrt, butSquare, butInv, butCos,
             butSin, butTan, butPower, butLog, butPercent, butAbs, butBin,
             butDecimal, butRetroceso, butln, butNegate, butDecimal, butE,
-            butPi, butDegRad;
+            butPi, butDegRad, butExp;
 
     private EventHandler eventHandler;
 
@@ -131,6 +131,7 @@ public class SwingView implements View {
         butBin = createButton("bin", ButtonType.FUNCTION);
         butNegate = createButton("+/-", ButtonType.NUMBER);
         butDecimal = createButton(".", ButtonType.NUMBER);
+        butExp = createButton("exp", ButtonType.NUMBER);
         butRetroceso = createButton("⌫", ButtonType.FUNCTION);
         butDegRad = createButton("Deg", ButtonType.FUNCTION);
 
@@ -186,6 +187,7 @@ public class SwingView implements View {
         subPanels[4].add(butNums[0]);
         subPanels[4].add(butDecimal);
         subPanels[4].add(Box.createHorizontalStrut(15));
+        subPanels[4].add(butExp);
         subPanels[4].add(butRetroceso);
         mainPanel.add(subPanels[4]);
 
@@ -266,6 +268,7 @@ public class SwingView implements View {
 
         // Other actions
         butDecimal.addActionListener(e -> eventHandler.onDecimalPressed());
+        butExp.addActionListener(e -> eventHandler.onExpPressed());
         butEqual.addActionListener(e -> eventHandler.onEqualsPressed());
         butCancel.addActionListener(e -> eventHandler.onClearPressed());
         butRetroceso.addActionListener(e -> eventHandler.onBackspacePressed());
