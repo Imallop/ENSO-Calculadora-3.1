@@ -2,7 +2,7 @@
  * @name        Swing implementation of Calculator View interface
  * @package     calculator
  * @file        SwingView.java
- * @description 
+ * @description
  */
 
 package calculator;
@@ -58,7 +58,8 @@ public class SwingView implements View {
     private final JButton butAdd, butMinus, butMultiply, butDivide,
             butEqual, butCancel, butSqrt, butSquare, butInv, butCos,
             butSin, butTan, butPower, butLog, butPercent, butAbs, butBin,
-            butln, butNegate, butDecimal, butE, butPi, butDegRad;
+            butDecimal, butRetroceso, butln, butNegate, butDecimal, butE,
+            butPi, butDegRad;
 
     private EventHandler eventHandler;
 
@@ -85,8 +86,8 @@ public class SwingView implements View {
         mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
 
-        subPanels = new JPanel[9];
-        for (int i = 0; i < 9; i++) {
+        subPanels = new JPanel[10];
+        for (int i = 0; i < 10; i++) {
             subPanels[i] = new JPanel(new FlowLayout(FlowLayout.LEFT, 5, 3));
         }
 
@@ -130,6 +131,7 @@ public class SwingView implements View {
         butBin = createButton("bin", ButtonType.FUNCTION);
         butNegate = createButton("+/-", ButtonType.NUMBER);
         butDecimal = createButton(".", ButtonType.NUMBER);
+        butRetroceso = createButton("⌫", ButtonType.FUNCTION);
         butDegRad = createButton("Deg", ButtonType.FUNCTION);
 
         setupLayout();
@@ -183,6 +185,8 @@ public class SwingView implements View {
         subPanels[4].add(butNegate);
         subPanels[4].add(butNums[0]);
         subPanels[4].add(butDecimal);
+        subPanels[4].add(Box.createHorizontalStrut(15));
+        subPanels[4].add(butRetroceso);
         mainPanel.add(subPanels[4]);
 
         // --- Extra separation ---
@@ -264,6 +268,7 @@ public class SwingView implements View {
         butDecimal.addActionListener(e -> eventHandler.onDecimalPressed());
         butEqual.addActionListener(e -> eventHandler.onEqualsPressed());
         butCancel.addActionListener(e -> eventHandler.onClearPressed());
+        butRetroceso.addActionListener(e -> eventHandler.onBackspacePressed());
         butDegRad.addActionListener(e -> eventHandler.onDegRadToggle());
     }
 
