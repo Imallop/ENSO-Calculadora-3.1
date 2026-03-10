@@ -10,6 +10,7 @@
 package calculator;
 
 import calculator.domain.BinaryOperatorModes;
+import calculator.domain.SpecialNumberModes;
 import calculator.domain.UnaryOperatorModes;
 
 public class Controller implements EventHandler {
@@ -95,6 +96,20 @@ public class Controller implements EventHandler {
             displayBuffer.append(result);
             resetingInput = true;
         }
+    }
+
+    @Override
+    public void onSpecialNumberPressed(double num){
+
+        if (resetingInput) {
+            displayBuffer = new StringBuilder();
+            view.clearDisplay();
+            resetingInput = false;
+        }
+
+        displayBuffer.append(num);
+        view.setDisplay(displayBuffer.toString());
+
     }
 
     @Override

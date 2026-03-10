@@ -36,6 +36,8 @@ public interface EventHandler {
      */
     void onUnaryOperatorPressed(UnaryOperatorModes mode);
 
+    void onSpecialNumberPressed(double num);
+    
     /**
      * Handle the equals button press
      */
