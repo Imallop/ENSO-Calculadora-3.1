@@ -25,6 +25,11 @@ public interface EventHandler {
     void onDecimalPressed();
     
     /**
+     * Handle an exponent button press for scientific notation
+     */
+    void onExpPressed();
+    
+    /**
      * Handle a binary operator button press
      * @param operator The operator (add, minus, multiply, divide, power)
      */
