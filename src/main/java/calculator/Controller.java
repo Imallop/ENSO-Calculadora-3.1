@@ -10,10 +10,11 @@
 package calculator;
 
 import calculator.domain.BinaryOperatorModes;
+import calculator.domain.SpecialNumberModes;
 import calculator.domain.UnaryOperatorModes;
 
 public class Controller implements EventHandler {
-    
+
     private final CalculatorModel model;
     private final View view;
     private StringBuilder displayBuffer;
@@ -79,7 +80,7 @@ public class Controller implements EventHandler {
             resetingInput = true;
         }
     }
-    
+
     @Override
     public void onUnaryOperatorPressed(UnaryOperatorModes mode) {
 
@@ -94,7 +95,21 @@ public class Controller implements EventHandler {
             resetingInput = true;
         }
     }
-    
+
+    @Override
+    public void onSpecialNumberPressed(double num){
+
+        if (resetingInput) {
+            displayBuffer = new StringBuilder();
+            view.clearDisplay();
+            resetingInput = false;
+        }
+
+        displayBuffer.append(num);
+        view.setDisplay(displayBuffer.toString());
+
+    }
+
     @Override
     public void onEqualsPressed() {
 
@@ -109,7 +124,7 @@ public class Controller implements EventHandler {
             resetingInput = true;
         }
     }
-    
+
     @Override
     public void onClearPressed() {
         displayBuffer = new StringBuilder();
@@ -117,7 +132,7 @@ public class Controller implements EventHandler {
         view.clearDisplay();
         resetingInput = false;
     }
-    
+
     private String formatResult(Double result) {
         if (Double.isNaN(result)) {
             return "NaN";

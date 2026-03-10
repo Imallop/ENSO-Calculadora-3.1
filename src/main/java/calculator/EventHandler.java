@@ -35,6 +35,8 @@ public interface EventHandler {
      * @param operator The operator (square, sqrt, sin, cos, etc)
      */
     void onUnaryOperatorPressed(UnaryOperatorModes mode);
+
+    void onSpecialNumberPressed(double num);
     
     /**
      * Handle the equals button press
