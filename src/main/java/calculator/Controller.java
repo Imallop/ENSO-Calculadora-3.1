@@ -16,12 +16,14 @@ public class Controller implements EventHandler {
     
     private final CalculatorModel model;
     private final View view;
+    private final SwingView swingView;
     private StringBuilder displayBuffer;
     private boolean resetingInput = false;
 
     public Controller(CalculatorModel model, View view) {
         this.model = model;
         this.view = view;
+        this.swingView = (view instanceof SwingView) ? (SwingView) view : null;
         this.displayBuffer = new StringBuilder();
         view.setActionListener(this);
     }
@@ -116,6 +118,14 @@ public class Controller implements EventHandler {
         model.reset();
         view.clearDisplay();
         resetingInput = false;
+    }
+
+    @Override
+    public void onDegRadToggle() {
+        boolean useDegrees = model.toggleDegRad();
+        if (swingView != null) {
+            swingView.updateDegRadButton(useDegrees);
+        }
     }
     
     private String formatResult(Double result) {
