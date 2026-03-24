@@ -8,8 +8,15 @@
 package calculator.operators;
 
 public class SinOperator implements UnaryOperator {
+    private final boolean useDegrees;
+
+    public SinOperator(boolean useDegrees) {
+        this.useDegrees = useDegrees;
+    }
+
     @Override
     public Double execute(Double num) {
-        return Math.sin(Math.toRadians(num));
+        double angle = useDegrees ? Math.toRadians(num) : num;
+        return Math.sin(angle);
     }
 }
