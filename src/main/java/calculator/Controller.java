@@ -10,7 +10,6 @@
 package calculator;
 
 import calculator.domain.BinaryOperatorModes;
-import calculator.domain.SpecialNumberModes;
 import calculator.domain.UnaryOperatorModes;
 
 public class Controller implements EventHandler {
