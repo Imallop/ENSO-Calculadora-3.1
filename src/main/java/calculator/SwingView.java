@@ -58,7 +58,7 @@ public class SwingView implements View {
     private final JButton butAdd, butMinus, butMultiply, butDivide,
             butEqual, butCancel, butSqrt, butSquare, butInv, butCos,
             butSin, butTan, butPower, butLog, butPercent, butAbs, butBin,
-            butDecimal, butRetroceso, butln, butNegate, butDecimal, butE,
+            butRetroceso, butln, butNegate, butDecimal, butE,
             butPi, butDegRad, butExp;
 
     private EventHandler eventHandler;
